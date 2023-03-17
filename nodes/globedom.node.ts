@@ -628,15 +628,18 @@ export class globedom implements INodeType {
 					
 						const rbody = "";
 						
-						const newItem: INodeExecutionData = {
-							json: {},
-							binary: {},
-						};
-						
 						const endpoint = "/susi/contact/all/*/*/" + authsid + "/";
 						
-						newItem.json = await globedomRequest.call(this, endpoint, rbody, authsid, "GET");
-						returnData.push(newItem);												
+						const response = await globedomRequest.call(this, endpoint, rbody, authsid, "GET");
+						
+						for(let dataIndex = 0; dataIndex<response.length;dataIndex++){
+							const newItem: INodeExecutionData = {
+								json: {},
+								binary: {},
+							};
+							newItem.json = response[dataIndex];
+							returnData.push(newItem);
+						}																		
 					}	
 
 					if (contacts === 'contact-info') {
