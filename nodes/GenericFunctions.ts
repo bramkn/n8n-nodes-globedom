@@ -58,7 +58,7 @@ export async function globedomRequest (
 		if(json.multiresponse){
 			return json.multiresponse.response;
 		} else {
-			return json.response;
+			return [].concat(json.response);
 		}
 	} catch (error:any) {
 		throw new NodeApiError(this.getNode(), {'error':error});
